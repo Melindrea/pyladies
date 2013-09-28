@@ -2,6 +2,7 @@
 body {
   padding-top: 20px;
   padding-bottom: 20px;
+  overflow-y: scroll;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -26,6 +27,36 @@ body {
 
 .header img {
   margin-right: 10px;
+}
+
+#content {
+  min-height: 450px;
+}
+
+.icons {
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.icons > div {
+  display: inline-block;
+  margin: 6px;
+}
+
+.icon-twitter {
+  color: #20ABD3;
+}
+
+.icon-facebook {
+  color: #4B6498;
+}
+
+.icon-meetup {
+  color: #E51938;
+}
+
+.icon-github-circled {
+  color: black;
 }
 
 /* Custom page footer */
