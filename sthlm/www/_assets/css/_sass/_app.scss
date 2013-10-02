@@ -1,3 +1,23 @@
+/* Hide from both screenreaders and browsers: h5bp.com/u */
+.hidden { display: none !important; visibility: hidden; }
+
+/* Hide only visually, but have it available for screenreaders: h5bp.com/v */
+.screen-reader-text { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }
+
+/* Extends the .screen-reader-text class to allow the element to be focusable when navigated to via the keyboard: h5bp.com/p */
+.screen-reader-text.focusable:active,
+.screen-reader-text.focusable:focus { clip: auto; height: auto; margin: 0; overflow: visible; position: static; width: auto; }
+
+/* Hide visually and from screenreaders, but maintain layout */
+.invisible { visibility: hidden; }
+
+%ir {
+    border: 0;
+    font: 0/0 a;
+    text-shadow: none;
+    color: transparent;
+}
+
 /* Space out content a bit */
 body {
   padding-top: 20px;
@@ -34,28 +54,38 @@ body {
 }
 
 .icons {
-  font-size: 20px;
-
-    > div {
+    list-style: none;
+    padding-left: 0;
+    li {
       display: inline-block;
       margin: 6px;
     }
 }
 
-.icon-twitter {
-  color: #20ABD3;
+[class^="icon-"] {
+    @extend %ir;
+    &:before {
+        font-size: 20px;
+    }
 }
 
-.icon-facebook {
-  color: #4B6498;
-}
+i:before {
 
-.icon-meetup {
-  color: #E51938;
-}
+    [href*="twitter.com/"] & {
+      color: #20ABD3;
+    }
 
-.icon-github-circled {
-  color: black;
+    [href*="facebook.com/"] & {
+      color: #4B6498;
+    }
+
+    [href*="meetup.com/"] & {
+      color: #E51938;
+    }
+
+    [href*="github.com/"] & {
+      color: black;
+    }
 }
 
 /* Custom page footer */
