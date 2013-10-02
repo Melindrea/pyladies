@@ -8,18 +8,15 @@
   {% if page %}{{page}} - {% endif %}{{ site.title }}
 </title>
 
-<!-- Bootstrap core CSS -->
-<link href="{{ get_asset('css/bootstrap.css') }}" rel="stylesheet">
-
 <!-- Main CSS -->
 <link href="{{ get_asset('css/main.css') }}" rel="stylesheet">
 
-<!-- Fontello font-->
-<link href="{{ get_asset('css/fontello.css') }}" rel="stylesheet">
-<link href="{{ get_asset('css/animation.css') }}" rel="stylesheet">
-
 <!-- Favicons -->
 <link rel="shortcut icon" href="{{ get_asset('images/favicon.ico') }}" type="image/x-icon">
+
+<!-- Scripts required at loading time -->
+<script src="{{ get_asset('js/head.min.js') }}"></script>
+
 
 {% if site.analytics %}
     <script type="text/javascript">

@@ -112,3 +112,10 @@ body {
     border-bottom: 0;
   }
 }
+
+// Shame
+
+//- Line-height to match bootstrap, as Sass rounds it
+.nav-tabs > li > a {
+  line-height: 1.428571429;
+}

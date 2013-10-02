@@ -176,6 +176,21 @@ module.exports = function (grunt) {
                     '<%= yeoman.dist %>/assets/js/head.min.js': [
                         '<%= yeoman.app %>/_assets/_bower_components/jquery/jquery.js',
                         '<%= yeoman.app %>/_assets/_bower_components/modernizr/modernizr.custom.js'
+                    ],
+                    '<%= yeoman.dist %>/assets/js/foot.min.js': [
+                        '<%= yeoman.app %>/_assets/_bower_components/sass-bootstrap/js/affix.js',
+                        '<%= yeoman.app %>/_assets/_bower_components/sass-bootstrap/js/alert.js',
+                        '<%= yeoman.app %>/_assets/_bower_components/sass-bootstrap/js/dropdown.js',
+                        '<%= yeoman.app %>/_assets/_bower_components/sass-bootstrap/js/tooltip.js',
+                        '<%= yeoman.app %>/_assets/_bower_components/sass-bootstrap/js/modal.js',
+                        '<%= yeoman.app %>/_assets/_bower_components/sass-bootstrap/js/transition.js',
+                        '<%= yeoman.app %>/_assets/_bower_components/sass-bootstrap/js/button.js',
+                        '<%= yeoman.app %>/_assets/_bower_components/sass-bootstrap/js/popover.js',
+                        '<%= yeoman.app %>/_assets/_bower_components/sass-bootstrap/js/typeahead.js',
+                        '<%= yeoman.app %>/_assets/_bower_components/sass-bootstrap/js/carousel.js',
+                        '<%= yeoman.app %>/_assets/_bower_components/sass-bootstrap/js/scrollspy.js',
+                        '<%= yeoman.app %>/_assets/_bower_components/sass-bootstrap/js/collapse.js',
+                        '<%= yeoman.app %>/_assets/_bower_components/sass-bootstrap/js/tab.js'
                     ]
                 }
             }

@@ -49,6 +49,7 @@ pip install -r requirements.txt
 npm install && bower install && bundle install
 mynt gen -f www _site #or...
 grunt build
+grunt server # starts a server with livereload as you work
 ```
 
 Requirements:
@@ -59,8 +60,7 @@ Requirements:
 * To add content you just need to know [Markdown](http://daringfireball.net/projects/markdown/) and [Mynt](http://mynt.mirroredwhite.com/)
 
 ```
-source /usr/local/bin/virtualenvwrapper.sh #really needs to be fixed...
 mkvirtualenv PyLadies # If not created
 workon PyLadies
-
+pip install -r requirements.txt
 ```

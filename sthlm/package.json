@@ -1,6 +1,6 @@
 {
-  "name": "pyladies-sthlm",
-  "version": "0.0.0",
+  "name": "pyladiessthlm",
+  "version": "0.0.2",
   "dependencies": {},
   "devDependencies": {
     "grunt": "~0.4.1",
