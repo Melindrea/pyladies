@@ -6,41 +6,40 @@ body {
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
-.header,
+[role="banner"],
 .marketing,
-.footer {
+[role="contentinfo"] {
   padding-left: 15px;
   padding-right: 15px;
 }
 
 /* Custom page header */
-.header {
+[role="banner"] {
   border-bottom: 1px solid #e5e5e5;
-}
-/* Make the masthead heading the same height as the navigation */
-.header h3 {
-  margin-top: 0;
-  margin-bottom: 0;
-  line-height: 40px;
-  padding-bottom: 1px;
+    /* Make the masthead heading the same height as the navigation */
+    h3 {
+      margin-top: 0;
+      margin-bottom: 0;
+      line-height: 40px;
+      padding-bottom: 1px;
+    }
+
+    img {
+      margin-right: 10px;
+    }
 }
 
-.header img {
-  margin-right: 10px;
-}
-
-#content {
+[role="document"] {
   min-height: 450px;
 }
 
 .icons {
   font-size: 20px;
-  line-height: 24px;
-}
 
-.icons > div {
-  display: inline-block;
-  margin: 6px;
+    > div {
+      display: inline-block;
+      margin: 6px;
+    }
 }
 
 .icon-twitter {
@@ -60,8 +59,8 @@ body {
 }
 
 /* Custom page footer */
-.footer {
-  padding-top: 19px;
+[role="contentinfo"] {
+  padding-top: 20px;
   color: #777;
   border-top: 1px solid #e5e5e5;
 }
@@ -78,33 +77,34 @@ body {
 
 /* Main marketing message and sign up button */
 .jumbotron {
-  text-align: left;
-  border-bottom: 1px solid #e5e5e5;
-}
-.jumbotron .btn {
-  font-size: 21px;
-  padding: 14px 24px;
+    text-align: left;
+    border-bottom: 1px solid #e5e5e5;
+
+    .btn {
+      font-size: 21px;
+      padding: 14px 24px;
+    }
 }
 
 /* Supporting marketing content */
 .marketing {
   margin: 40px 0;
-}
-.marketing p + h4 {
-  margin-top: 28px;
+    p + h4 {
+      margin-top: 28px;
+    }
 }
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
   /* Remove the padding we set earlier */
-  .header,
+  [role="banner"],
   .marketing,
-  .footer {
+  [role="contentinfo"] {
     padding-left: 0;
     padding-right: 0;
   }
   /* Space out the masthead */
-  .header {
+  [role="banner"] {
     margin-bottom: 30px;
   }
   /* Remove the bottom border on the jumbotron for visual effect */

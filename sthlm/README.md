@@ -45,6 +45,7 @@ PyLadies Sthlm
 
 From within sthlm/
 ```
+workon PyLadies
 pip install -r requirements.txt
 npm install && bower install && bundle install
 mynt gen -f www _site #or...
@@ -60,7 +61,6 @@ Requirements:
 * To add content you just need to know [Markdown](http://daringfireball.net/projects/markdown/) and [Mynt](http://mynt.mirroredwhite.com/)
 
 ```
-mkvirtualenv PyLadies # If not created
 workon PyLadies
 pip install -r requirements.txt
 ```

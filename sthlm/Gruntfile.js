@@ -35,9 +35,13 @@ module.exports = function (grunt) {
             }
         },
         watch: {
+            js: {
+                files: ['<%= yeoman.app %>/_assets/js/{,*/}*.js'],
+                tasks: ['js', 'modernizr']
+            },
             compass: {
                 files: ['<%= yeoman.app %>/_assets/css/_sass/{,*/}*.{scss,sass}'],
-                tasks: ['compass:server', 'autoprefixer']
+                tasks: ['compass:server', 'autoprefixer', 'modernizr']
             },
             mynt: {
                 files: ['<%= yeoman.app %>/**/*.html'],
@@ -108,8 +112,16 @@ module.exports = function (grunt) {
             },
             all: [
                 'Gruntfile.js',
-                '<%= yeoman.app %>/scripts/{,*/}*.js',
-                '!<%= yeoman.app %>/scripts/vendor/*',
+                '<%= yeoman.app %>/_assets/js/{,*/}*.js',
+                '!<%= yeoman.app %>_assets/js/_vendor/*',
+                'test/spec/{,*/}*.js'
+            ]
+        },
+        jsvalidate: {
+            files: [
+                'Gruntfile.js',
+                '<%= yeoman.app %>/_assets/js/{,*/}*.js',
+                '!<%= yeoman.app %>_assets/js/_vendor/*',
                 'test/spec/{,*/}*.js'
             ]
         },
@@ -255,23 +267,6 @@ module.exports = function (grunt) {
                 }
             }
         },
-        // Put files not handled in other tasks here
-        copy: {
-            dist: {
-                files: [{
-                    expand: true,
-                    dot: true,
-                    cwd: '<%= yeoman.app %>',
-                    dest: '<%= yeoman.dist %>',
-                    src: [
-                        '*.{ico,png,txt}',
-                        '.htaccess',
-                        'images/{,*/}*.{webp,gif}',
-                        'styles/fonts/{,*/}*.*'
-                    ]
-                }]
-            }
-        },
         modernizr: {
             devFile: '<%= yeoman.app %>/_assets/_bower_components/modernizr/modernizr.js',
             outputFile: '<%= yeoman.app %>/_assets/_bower_components/modernizr/modernizr.custom.js',
@@ -319,7 +314,13 @@ module.exports = function (grunt) {
         'mocha'
     ]);
 
+    grunt.registerTask('js', [
+        'newer:jsvalidate',
+        'newer:jshint'
+    ]);
+
     grunt.registerTask('build', [
+        'js',
         'mynt:dist',
         'useminPrepare',
         'concurrent:dist',
@@ -327,7 +328,6 @@ module.exports = function (grunt) {
         'modernizr',
         'cssmin',
         'uglify',
-        'copy:dist',
         'rev',
         'usemin'
     ]);
@@ -342,7 +342,7 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask('default', [
-        'jshint',
+        'js',
         'test',
         'build'
     ]);
