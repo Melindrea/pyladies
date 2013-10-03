@@ -66,25 +66,22 @@ body {
     @extend %ir;
     &:before {
         font-size: 20px;
-    }
-}
+        // [href*="twitter.com/"] & {
+        //   color: #20ABD3;
+        // }
 
-i:before {
+        // [href*="facebook.com/"] & {
+        //   color: #4B6498;
+        // }
 
-    [href*="twitter.com/"] & {
-      color: #20ABD3;
-    }
+        // [href*="meetup.com/"] & {
+        //   color: #E51938;
+        // }
 
-    [href*="facebook.com/"] & {
-      color: #4B6498;
-    }
-
-    [href*="meetup.com/"] & {
-      color: #E51938;
-    }
-
-    [href*="github.com/"] & {
-      color: black;
+        // [href*="github.com/"] & {
+        //   color: black;
+        // }
+        @extend %social-icons;
     }
 }
 
