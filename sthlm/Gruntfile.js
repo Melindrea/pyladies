@@ -21,7 +21,8 @@ module.exports = function (grunt) {
     // configurable paths
     var yeomanConfig = {
         app: 'www',
-        dist: '_site'
+        dist: '_site',
+        deploy: '../../PyladiesSthlm.github.io'
     };
 
     grunt.initConfig({
@@ -32,6 +33,19 @@ module.exports = function (grunt) {
             },
             mynt: {                      // Target
                 command: 'mynt gen -f www .tmp'
+            },
+            deploy: {
+                command: [
+                    'git add --all',
+                    'git commit -m "Automatic commit from main repository"',
+                    'git push'
+                ].join('&&'),
+                options: {
+                    stdout: true,
+                    execOptions: {
+                        cwd: '<%= yeoman.deploy %>'
+                    }
+                }
             }
         },
         watch: {
@@ -207,6 +221,33 @@ module.exports = function (grunt) {
                 }
             }
         },
+        copy: {
+            deploy: {
+                files: [
+                    {
+                        expand: true,
+                        dot: true,
+                        cwd: '<%= yeoman.dist %>',
+                        dest: '<%= yeoman.deploy %>',
+                        src: [
+                            '{,*/}*.*',
+                            'assets/{,*/}*.*',
+                            'README.md'
+                        ]
+                    }, {
+                        expand: true,
+                        dot: true,
+                        cwd: '<%= yeoman.app %>',
+                        dest: '<%= yeoman.deploy %>/src',
+                        src: [
+                            '{,*/}*.*',
+                            '_assets/{,*/}*.*',
+                            '!_assets/_bower_components'
+                        ]
+                    }
+                ]
+            }
+        },
         rev: {
             dist: {
                 files: {
@@ -340,6 +381,12 @@ module.exports = function (grunt) {
         grunt.task.run(['shell:mynt']);
 
     });
+
+    grunt.registerTask('deploy', [
+        'build',
+        'copy:deploy',
+        'shell:deploy'
+    ]);
 
     grunt.registerTask('default', [
         'js',
