@@ -66,21 +66,6 @@ body {
     @extend %ir;
     &:before {
         font-size: 20px;
-        // [href*="twitter.com/"] & {
-        //   color: #20ABD3;
-        // }
-
-        // [href*="facebook.com/"] & {
-        //   color: #4B6498;
-        // }
-
-        // [href*="meetup.com/"] & {
-        //   color: #E51938;
-        // }
-
-        // [href*="github.com/"] & {
-        //   color: black;
-        // }
         @extend %social-icons;
     }
 }
