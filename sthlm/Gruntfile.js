@@ -50,8 +50,8 @@ module.exports = function (grunt) {
         },
         watch: {
             js: {
-                files: ['<%= yeoman.app %>/_assets/js/{,*/}*.js'],
-                tasks: ['js', 'modernizr']
+                files: ['<%= yeoman.app %>/_assets/_js/{,*/}*.js'],
+                tasks: ['js', 'modernizr', 'uglify:server']
             },
             compass: {
                 files: ['<%= yeoman.app %>/_assets/css/_sass/{,*/}*.{scss,sass}'],
@@ -68,7 +68,7 @@ module.exports = function (grunt) {
                 files: [
                     '<%= yeoman.app %>{,*/}*.html',
                     '.tmp/assets/css/{,*/}*.css',
-                    '<%= yeoman.app %>/_assets/js/{,*/}*.js',
+                    '<%= yeoman.app %>/_assets/_js/{,*/}*.js',
                     '.tmp/assets/js/{,*/}*.js',
                     '<%= yeoman.app %>/_assets/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
                 ]
@@ -126,16 +126,16 @@ module.exports = function (grunt) {
             },
             all: [
                 'Gruntfile.js',
-                '<%= yeoman.app %>/_assets/js/{,*/}*.js',
-                '!<%= yeoman.app %>_assets/js/_vendor/*',
+                '<%= yeoman.app %>/_assets/_js/{,*/}*.js',
+                '!<%= yeoman.app %>_assets/_js/_vendor/*',
                 'test/spec/{,*/}*.js'
             ]
         },
         jsvalidate: {
             files: [
                 'Gruntfile.js',
-                '<%= yeoman.app %>/_assets/js/{,*/}*.js',
-                '!<%= yeoman.app %>_assets/js/_vendor/*',
+                '<%= yeoman.app %>/_assets/_js/{,*/}*.js',
+                '!<%= yeoman.app %>_assets/_js/_vendor/*',
                 'test/spec/{,*/}*.js'
             ]
         },
@@ -153,7 +153,7 @@ module.exports = function (grunt) {
                 cssDir: '.tmp/assets/css',
                 generatedImagesDir: '.tmp/assets/images/generated',
                 imagesDir: '<%= yeoman.app %>/_assets/images',
-                javascriptsDir: '<%= yeoman.app %>/_assets/js',
+                javascriptsDir: '<%= yeoman.app %>/_assets/_js',
                 fontsDir: '<%= yeoman.app %>/_assets/fonts',
                 importPath: '<%= yeoman.app %>/_assets/_bower_components',
                 httpImagesPath: '/assets/images',
@@ -204,6 +204,29 @@ module.exports = function (grunt) {
                         '<%= yeoman.app %>/_assets/_bower_components/modernizr/modernizr.custom.js'
                     ],
                     '<%= yeoman.dist %>/assets/js/foot.min.js': [
+                        '<%= yeoman.app %>/_assets/_bower_components/sass-bootstrap/js/affix.js',
+                        '<%= yeoman.app %>/_assets/_bower_components/sass-bootstrap/js/alert.js',
+                        '<%= yeoman.app %>/_assets/_bower_components/sass-bootstrap/js/dropdown.js',
+                        '<%= yeoman.app %>/_assets/_bower_components/sass-bootstrap/js/tooltip.js',
+                        '<%= yeoman.app %>/_assets/_bower_components/sass-bootstrap/js/modal.js',
+                        '<%= yeoman.app %>/_assets/_bower_components/sass-bootstrap/js/transition.js',
+                        '<%= yeoman.app %>/_assets/_bower_components/sass-bootstrap/js/button.js',
+                        '<%= yeoman.app %>/_assets/_bower_components/sass-bootstrap/js/popover.js',
+                        '<%= yeoman.app %>/_assets/_bower_components/sass-bootstrap/js/typeahead.js',
+                        '<%= yeoman.app %>/_assets/_bower_components/sass-bootstrap/js/carousel.js',
+                        '<%= yeoman.app %>/_assets/_bower_components/sass-bootstrap/js/scrollspy.js',
+                        '<%= yeoman.app %>/_assets/_bower_components/sass-bootstrap/js/collapse.js',
+                        '<%= yeoman.app %>/_assets/_bower_components/sass-bootstrap/js/tab.js'
+                    ]
+                }
+            },
+            server: {
+                files: {
+                    '.tmp/assets/js/head.min.js': [
+                        '<%= yeoman.app %>/_assets/_bower_components/jquery/jquery.js',
+                        '<%= yeoman.app %>/_assets/_bower_components/modernizr/modernizr.custom.js'
+                    ],
+                    '.tmp/assets/js/foot.min.js': [
                         '<%= yeoman.app %>/_assets/_bower_components/sass-bootstrap/js/affix.js',
                         '<%= yeoman.app %>/_assets/_bower_components/sass-bootstrap/js/alert.js',
                         '<%= yeoman.app %>/_assets/_bower_components/sass-bootstrap/js/dropdown.js',
@@ -341,6 +364,7 @@ module.exports = function (grunt) {
             'mynt',
             'concurrent:server',
             'autoprefixer',
+            'uglify:server',
             'connect:livereload',
             'open',
             'watch'
