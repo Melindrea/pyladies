@@ -20,7 +20,7 @@ module.exports = function (grunt) {
 
     // configurable paths
     var yeomanConfig = {
-        app: 'www',
+        app: 'src',
         dist: '_site',
         deploy: '../../PyladiesSthlm.github.io'
     };
@@ -29,10 +29,10 @@ module.exports = function (grunt) {
         yeoman: yeomanConfig,
         shell: {                                // Task
             myntDist: {                      // Target
-                command: 'mynt gen -f www _site'
+                command: 'mynt gen -f src _site'
             },
             mynt: {                      // Target
-                command: 'mynt gen -f www .tmp'
+                command: 'mynt gen -f src .tmp'
             },
             deploy: {
                 command: [
