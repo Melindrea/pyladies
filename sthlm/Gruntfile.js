@@ -21,8 +21,7 @@ module.exports = function (grunt) {
     // configurable paths
     var yeomanConfig = {
         app: 'src',
-        dist: '_site',
-        deploy: '../../PyladiesSthlm.github.io'
+        dist: '_site'
     };
 
     grunt.initConfig({
@@ -33,19 +32,6 @@ module.exports = function (grunt) {
             },
             mynt: {                      // Target
                 command: 'mynt gen -f src .tmp'
-            },
-            deploy: {
-                command: [
-                    'git add --all',
-                    'git commit -m "Automatic commit from main repository"',
-                    'git push'
-                ].join('&&'),
-                options: {
-                    stdout: true,
-                    execOptions: {
-                        cwd: '<%= yeoman.deploy %>'
-                    }
-                }
             }
         },
         watch: {
@@ -199,11 +185,11 @@ module.exports = function (grunt) {
             },
             dist: {
                 files: {
-                    '<%= yeoman.dist %>/assets/js/head.min.js': [
+                    '<%= yeoman.dist %>/assets/js/head.js': [
                         '<%= yeoman.app %>/_assets/_bower_components/jquery/jquery.js',
                         '<%= yeoman.app %>/_assets/_bower_components/modernizr/modernizr.custom.js'
                     ],
-                    '<%= yeoman.dist %>/assets/js/foot.min.js': [
+                    '<%= yeoman.dist %>/assets/js/foot.js': [
                         '<%= yeoman.app %>/_assets/_bower_components/sass-bootstrap/js/affix.js',
                         '<%= yeoman.app %>/_assets/_bower_components/sass-bootstrap/js/alert.js',
                         '<%= yeoman.app %>/_assets/_bower_components/sass-bootstrap/js/dropdown.js',
@@ -222,11 +208,11 @@ module.exports = function (grunt) {
             },
             server: {
                 files: {
-                    '.tmp/assets/js/head.min.js': [
+                    '.tmp/assets/js/head.js': [
                         '<%= yeoman.app %>/_assets/_bower_components/jquery/jquery.js',
                         '<%= yeoman.app %>/_assets/_bower_components/modernizr/modernizr.custom.js'
                     ],
-                    '.tmp/assets/js/foot.min.js': [
+                    '.tmp/assets/js/foot.js': [
                         '<%= yeoman.app %>/_assets/_bower_components/sass-bootstrap/js/affix.js',
                         '<%= yeoman.app %>/_assets/_bower_components/sass-bootstrap/js/alert.js',
                         '<%= yeoman.app %>/_assets/_bower_components/sass-bootstrap/js/dropdown.js',
@@ -352,6 +338,15 @@ module.exports = function (grunt) {
                 'imagemin',
                 'svgmin'
             ]
+        },
+        'gh-pages': {
+            options: {
+                base: '<%= yeoman.dist %>',
+                branch: 'master',
+                repo: 'git@github.com:PyladiesSthlm/PyladiesSthlm.github.io.git',
+                message: 'Auto-generated commit from Grunt task in source'
+            },
+            src: '**/*'
         }
     });
 
@@ -408,8 +403,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask('deploy', [
         'build',
-        'copy:deploy',
-        'shell:deploy'
+        'gh-pages'
     ]);
 
     grunt.registerTask('default', [
