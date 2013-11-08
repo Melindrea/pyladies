@@ -203,7 +203,8 @@ module.exports = function (grunt) {
                         '<%= yeoman.app %>/_assets/_bower_components/sass-bootstrap/js/scrollspy.js',
                         '<%= yeoman.app %>/_assets/_bower_components/sass-bootstrap/js/collapse.js',
                         '<%= yeoman.app %>/_assets/_bower_components/sass-bootstrap/js/tab.js',
-                        '>%= yeoman.app %>/_assets/js/meetup_widget.js'
+                        '<%= yeoman.app %>/_assets/js/meetup_widget.js',
+                        '<%= yeoman.app %>/_assets/js/main.js'
                     ]
                 }
             },
