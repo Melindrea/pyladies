@@ -26,6 +26,13 @@ module.exports = function (grunt) {
 
     grunt.initConfig({
         yeoman: yeomanConfig,
+        heroku: {
+            repo: 'git@heroku.com:stockholmpyladies.git',
+            dist: 'heroku'
+        },
+        github: {
+            repo: 'git@github.com:PyladiesSthlm/PyladiesSthlm.github.io.git'
+        }
         shell: {                                // Task
             myntDist: {                      // Target
                 command: 'mynt gen -f src _site'
@@ -43,6 +50,17 @@ module.exports = function (grunt) {
                 options: {
                     stdout: true
                 }
+            },
+            heroku: {
+                options: {
+                    execOptions: {
+                        cwd: '<%= heroku.dist %>'
+                    }
+                },
+                command: [
+                    'mv index.html home.html',
+                    'echo \'<?php include_once("home.html"); ?>\' >> index.php'
+                ].join('&&')
             }
         },
         watch: {
@@ -115,7 +133,8 @@ module.exports = function (grunt) {
             }
         },
         clean: {
-            server: '.tmp'
+            server: '.tmp',
+            heroku: '<%= heroku.dist %>'
         },
         jshint: {
             options: {
@@ -246,30 +265,12 @@ module.exports = function (grunt) {
             }
         },
         copy: {
-            deploy: {
-                files: [
-                    {
-                        expand: true,
-                        dot: true,
-                        cwd: '<%= yeoman.dist %>',
-                        dest: '<%= yeoman.deploy %>',
-                        src: [
-                            '{,*/}*.*',
-                            'assets/{,*/}*.*',
-                            'README.md'
-                        ]
-                    }, {
-                        expand: true,
-                        dot: true,
-                        cwd: '<%= yeoman.app %>',
-                        dest: '<%= yeoman.deploy %>/src',
-                        src: [
-                            '{,*/}*.*',
-                            '_assets/{,*/}*.*',
-                            '!_assets/_bower_components'
-                        ]
-                    }
-                ]
+            heroku: {
+                expand: true,
+                dot: true,
+                cwd: '<%= yeoman.dist %>',
+                dest: '<%= heroku.dist %>',
+                src: '**'
             }
         },
         rev: {
@@ -355,13 +356,24 @@ module.exports = function (grunt) {
             ]
         },
         'gh-pages': {
-            options: {
-                base: '<%= yeoman.dist %>',
-                branch: 'master',
-                repo: 'git@github.com:PyladiesSthlm/PyladiesSthlm.github.io.git',
-                message: 'Auto-generated commit from Grunt task in source'
+            github: {
+                options: {
+                    base: '<%= yeoman.dist %>',
+                    branch: 'master',
+                    repo: '<%= github.repo %>',
+                    message: 'Auto-generated commit from Grunt task in source'
+                },
+                src: '**/*'
             },
-            src: '**/*'
+            heroku : {
+                options: {
+                    repo: '<%= heroku.repo %>',
+                    branch: 'master',
+                    base: '<%= heroku.dist %>',
+                    message: 'Auto-generated commit from Grunt task in source'
+                },
+                src: '**/*'
+            }
         }
     });
 
@@ -416,10 +428,19 @@ module.exports = function (grunt) {
 
     });
 
-    grunt.registerTask('deploy', [
-        'build',
-        'gh-pages'
-    ]);
+    grunt.registerTask('deploy', function (target) {
+        if (target === 'github') {
+            return grunt.task.run(['build', 'gh-pages:github']);
+        }
+
+        grunt.task.run([
+            'build',
+            'clean:heroku',
+            'copy:heroku',
+            'shell:heroku',
+            'gh-pages:heroku'
+        ]);
+    });
 
     grunt.registerTask('default', [
         'js',
