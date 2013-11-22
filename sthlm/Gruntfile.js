@@ -32,6 +32,17 @@ module.exports = function (grunt) {
             },
             mynt: {                      // Target
                 command: 'mynt gen -f src .tmp'
+            },
+            update: {
+                command: [
+                    'npm update',
+                    'bower update',
+                    'bundle update',
+                    'pip install -r "requirements.txt"'
+                ].join('&&'),
+                options: {
+                    stdout: true
+                }
             }
         },
         watch: {
@@ -414,5 +425,9 @@ module.exports = function (grunt) {
         'js',
         'test',
         'build'
+    ]);
+
+    grunt.registerTask('update', [
+        'shell:update'
     ]);
 };
